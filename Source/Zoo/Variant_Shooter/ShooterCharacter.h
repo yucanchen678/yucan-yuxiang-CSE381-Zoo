@@ -116,6 +116,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	void DoSwitchWeapon();
 
+	/** Gives a weapon of this class to the owner */
+	UFUNCTION(BlueprintCallable, Category="Weapons")
+	virtual void AddWeaponClass(const TSubclassOf<AShooterWeapon>& WeaponClass) override;
+
 public:
 
 	//~Begin IShooterWeaponHolder interface
@@ -134,9 +138,6 @@ public:
 
 	/** Calculates and returns the aim location for the weapon */
 	virtual FVector GetWeaponTargetLocation() override;
-
-	/** Gives a weapon of this class to the owner */
-	virtual void AddWeaponClass(const TSubclassOf<AShooterWeapon>& WeaponClass) override;
 
 	/** Activates the passed weapon */
 	virtual void OnWeaponActivated(AShooterWeapon* Weapon) override;
