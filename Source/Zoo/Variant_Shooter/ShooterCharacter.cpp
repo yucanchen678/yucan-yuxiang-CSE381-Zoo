@@ -281,3 +281,18 @@ void AShooterCharacter::OnRespawn()
 	// destroy the character to force the PC to respawn
 	Destroy();
 }
+
+void AShooterCharacter::BP_AddWeaponClass(TSubclassOf<AShooterWeapon> WeaponClass) {
+	AddWeaponClass(WeaponClass);
+}
+
+void AShooterCharacter::BP_UnequipCurrentWeapon()
+{
+	if (CurrentWeapon)
+	{
+		CurrentWeapon->DeactivateWeapon();
+		OwnedWeapons.Remove(CurrentWeapon);
+		CurrentWeapon = nullptr;
+	}
+}
+

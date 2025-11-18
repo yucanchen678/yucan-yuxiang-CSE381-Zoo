@@ -116,9 +116,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	void DoSwitchWeapon();
 
-	/** Gives a weapon of this class to the owner */
 	UFUNCTION(BlueprintCallable, Category="Weapons")
-	virtual void AddWeaponClass(const TSubclassOf<AShooterWeapon>& WeaponClass) override;
+	void BP_AddWeaponClass(TSubclassOf<AShooterWeapon> WeaponClass);
+
+	UFUNCTION(BlueprintCallable, Category = "Weapons")
+	void BP_UnequipCurrentWeapon();
 
 public:
 
@@ -135,6 +137,9 @@ public:
 
 	/** Updates the weapon's HUD with the current ammo count */
 	virtual void UpdateWeaponHUD(int32 CurrentAmmo, int32 MagazineSize) override;
+
+	/** Gives a weapon of this class to the owner */
+	virtual void AddWeaponClass(const TSubclassOf<AShooterWeapon>& WeaponClass) override;
 
 	/** Calculates and returns the aim location for the weapon */
 	virtual FVector GetWeaponTargetLocation() override;
