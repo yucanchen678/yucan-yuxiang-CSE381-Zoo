@@ -216,3 +216,4 @@ const TSubclassOf<UAnimInstance>& AShooterWeapon::GetThirdPersonAnimInstanceClas
 {
 	return ThirdPersonAnimInstanceClass;
 }
+
