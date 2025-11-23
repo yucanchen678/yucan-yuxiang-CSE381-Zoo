@@ -176,7 +176,7 @@ FVector AShooterCharacter::GetWeaponTargetLocation()
 	return OutHit.bBlockingHit ? OutHit.ImpactPoint : OutHit.TraceEnd;
 }
 
-void AShooterCharacter::AddWeaponClass(const TSubclassOf<AShooterWeapon>& WeaponClass)
+AShooterWeapon* AShooterCharacter::AddWeaponClass(const TSubclassOf<AShooterWeapon>& WeaponClass)
 {
 	// do we already own this weapon?
 	AShooterWeapon* OwnedWeapon = FindWeaponOfType(WeaponClass);
@@ -206,8 +206,11 @@ void AShooterCharacter::AddWeaponClass(const TSubclassOf<AShooterWeapon>& Weapon
 			// switch to the new weapon
 			CurrentWeapon = AddedWeapon;
 			CurrentWeapon->ActivateWeapon();
+
+			return AddedWeapon;
 		}
 	}
+	return OwnedWeapon;
 }
 
 void AShooterCharacter::OnWeaponActivated(AShooterWeapon* Weapon)
@@ -282,8 +285,9 @@ void AShooterCharacter::OnRespawn()
 	Destroy();
 }
 
-void AShooterCharacter::BP_AddWeaponClass(TSubclassOf<AShooterWeapon> WeaponClass) {
-	AddWeaponClass(WeaponClass);
+AShooterWeapon* AShooterCharacter::BP_AddWeaponClass(TSubclassOf<AShooterWeapon> WeaponClass) {
+	AShooterWeapon* gun_ref = AddWeaponClass(WeaponClass);
+	return gun_ref;
 }
 
 void AShooterCharacter::BP_UnequipCurrentWeapon()
